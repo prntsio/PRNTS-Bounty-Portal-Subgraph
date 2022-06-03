@@ -1,6 +1,0 @@
-type Bounty @entity {
-  id: ID!
-  bountyId: BigInt!
-  fulfiller: Bytes!
-  data: String!
-}
