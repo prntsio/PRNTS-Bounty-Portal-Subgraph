@@ -1,6 +1,8 @@
 type Bounty @entity {
   id: ID!
-  bountyId: BigInt!
-  fulfiller: Bytes!
+  creator: Bytes!
   data: String!
+  deadline: BigInt!
+  token: Bytes!
+  tokenVersion: BigInt!  
 }

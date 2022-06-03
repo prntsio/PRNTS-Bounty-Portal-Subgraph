@@ -42,22 +42,13 @@ export class Bounty extends Entity {
     this.set("id", Value.fromString(value));
   }
 
-  get bountyId(): BigInt {
-    let value = this.get("bountyId");
-    return value!.toBigInt();
-  }
-
-  set bountyId(value: BigInt) {
-    this.set("bountyId", Value.fromBigInt(value));
-  }
-
-  get fulfiller(): Bytes {
-    let value = this.get("fulfiller");
+  get creator(): Bytes {
+    let value = this.get("creator");
     return value!.toBytes();
   }
 
-  set fulfiller(value: Bytes) {
-    this.set("fulfiller", Value.fromBytes(value));
+  set creator(value: Bytes) {
+    this.set("creator", Value.fromBytes(value));
   }
 
   get data(): string {
@@ -67,5 +58,32 @@ export class Bounty extends Entity {
 
   set data(value: string) {
     this.set("data", Value.fromString(value));
+  }
+
+  get deadline(): BigInt {
+    let value = this.get("deadline");
+    return value!.toBigInt();
+  }
+
+  set deadline(value: BigInt) {
+    this.set("deadline", Value.fromBigInt(value));
+  }
+
+  get token(): Bytes {
+    let value = this.get("token");
+    return value!.toBytes();
+  }
+
+  set token(value: Bytes) {
+    this.set("token", Value.fromBytes(value));
+  }
+
+  get tokenVersion(): BigInt {
+    let value = this.get("tokenVersion");
+    return value!.toBigInt();
+  }
+
+  set tokenVersion(value: BigInt) {
+    this.set("tokenVersion", Value.fromBigInt(value));
   }
 }
