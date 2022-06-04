@@ -59,8 +59,8 @@ export class Bounty extends Entity {
     }
   }
 
-  get creator(): Bytes | null {
-    let value = this.get("creator");
+  get sender(): Bytes | null {
+    let value = this.get("sender");
     if (!value || value.kind == ValueKind.NULL) {
       return null;
     } else {
@@ -68,16 +68,16 @@ export class Bounty extends Entity {
     }
   }
 
-  set creator(value: Bytes | null) {
+  set sender(value: Bytes | null) {
     if (!value) {
-      this.unset("creator");
+      this.unset("sender");
     } else {
-      this.set("creator", Value.fromBytes(<Bytes>value));
+      this.set("sender", Value.fromBytes(<Bytes>value));
     }
   }
 
-  get issuers(): string | null {
-    let value = this.get("issuers");
+  get title(): string | null {
+    let value = this.get("title");
     if (!value || value.kind == ValueKind.NULL) {
       return null;
     } else {
@@ -85,16 +85,16 @@ export class Bounty extends Entity {
     }
   }
 
-  set issuers(value: string | null) {
+  set title(value: string | null) {
     if (!value) {
-      this.unset("issuers");
+      this.unset("title");
     } else {
-      this.set("issuers", Value.fromString(<string>value));
+      this.set("title", Value.fromString(<string>value));
     }
   }
 
-  get approvers(): string | null {
-    let value = this.get("approvers");
+  get type(): string | null {
+    let value = this.get("type");
     if (!value || value.kind == ValueKind.NULL) {
       return null;
     } else {
@@ -102,16 +102,16 @@ export class Bounty extends Entity {
     }
   }
 
-  set approvers(value: string | null) {
+  set type(value: string | null) {
     if (!value) {
-      this.unset("approvers");
+      this.unset("type");
     } else {
-      this.set("approvers", Value.fromString(<string>value));
+      this.set("type", Value.fromString(<string>value));
     }
   }
 
-  get data(): string | null {
-    let value = this.get("data");
+  get nftHash(): string | null {
+    let value = this.get("nftHash");
     if (!value || value.kind == ValueKind.NULL) {
       return null;
     } else {
@@ -119,11 +119,164 @@ export class Bounty extends Entity {
     }
   }
 
-  set data(value: string | null) {
+  set nftHash(value: string | null) {
     if (!value) {
-      this.unset("data");
+      this.unset("nftHash");
     } else {
-      this.set("data", Value.fromString(<string>value));
+      this.set("nftHash", Value.fromString(<string>value));
+    }
+  }
+
+  get contributersType(): string | null {
+    let value = this.get("contributersType");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toString();
+    }
+  }
+
+  set contributersType(value: string | null) {
+    if (!value) {
+      this.unset("contributersType");
+    } else {
+      this.set("contributersType", Value.fromString(<string>value));
+    }
+  }
+
+  get spotifyPlays(): string | null {
+    let value = this.get("spotifyPlays");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toString();
+    }
+  }
+
+  set spotifyPlays(value: string | null) {
+    if (!value) {
+      this.unset("spotifyPlays");
+    } else {
+      this.set("spotifyPlays", Value.fromString(<string>value));
+    }
+  }
+
+  get instagramFollowers(): string | null {
+    let value = this.get("instagramFollowers");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toString();
+    }
+  }
+
+  set instagramFollowers(value: string | null) {
+    if (!value) {
+      this.unset("instagramFollowers");
+    } else {
+      this.set("instagramFollowers", Value.fromString(<string>value));
+    }
+  }
+
+  get email(): string | null {
+    let value = this.get("email");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toString();
+    }
+  }
+
+  set email(value: string | null) {
+    if (!value) {
+      this.unset("email");
+    } else {
+      this.set("email", Value.fromString(<string>value));
+    }
+  }
+
+  get description(): string | null {
+    let value = this.get("description");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toString();
+    }
+  }
+
+  set description(value: string | null) {
+    if (!value) {
+      this.unset("description");
+    } else {
+      this.set("description", Value.fromString(<string>value));
+    }
+  }
+
+  get estimatedTime(): string | null {
+    let value = this.get("estimatedTime");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toString();
+    }
+  }
+
+  set estimatedTime(value: string | null) {
+    if (!value) {
+      this.unset("estimatedTime");
+    } else {
+      this.set("estimatedTime", Value.fromString(<string>value));
+    }
+  }
+
+  get featureBountyType(): string | null {
+    let value = this.get("featureBountyType");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toString();
+    }
+  }
+
+  set featureBountyType(value: string | null) {
+    if (!value) {
+      this.unset("featureBountyType");
+    } else {
+      this.set("featureBountyType", Value.fromString(<string>value));
+    }
+  }
+
+  get bountyPrice(): string | null {
+    let value = this.get("bountyPrice");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toString();
+    }
+  }
+
+  set bountyPrice(value: string | null) {
+    if (!value) {
+      this.unset("bountyPrice");
+    } else {
+      this.set("bountyPrice", Value.fromString(<string>value));
+    }
+  }
+
+  get paymentDue(): string | null {
+    let value = this.get("paymentDue");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toString();
+    }
+  }
+
+  set paymentDue(value: string | null) {
+    if (!value) {
+      this.unset("paymentDue");
+    } else {
+      this.set("paymentDue", Value.fromString(<string>value));
     }
   }
 
@@ -161,23 +314,6 @@ export class Bounty extends Entity {
     }
   }
 
-  get tokenVersion(): BigInt | null {
-    let value = this.get("tokenVersion");
-    if (!value || value.kind == ValueKind.NULL) {
-      return null;
-    } else {
-      return value.toBigInt();
-    }
-  }
-
-  set tokenVersion(value: BigInt | null) {
-    if (!value) {
-      this.unset("tokenVersion");
-    } else {
-      this.set("tokenVersion", Value.fromBigInt(<BigInt>value));
-    }
-  }
-
   get fulfillmentId(): BigInt | null {
     let value = this.get("fulfillmentId");
     if (!value || value.kind == ValueKind.NULL) {
@@ -212,8 +348,8 @@ export class Bounty extends Entity {
     }
   }
 
-  get submitter(): Bytes | null {
-    let value = this.get("submitter");
+  get finalFulfiller(): Bytes | null {
+    let value = this.get("finalFulfiller");
     if (!value || value.kind == ValueKind.NULL) {
       return null;
     } else {
@@ -221,11 +357,11 @@ export class Bounty extends Entity {
     }
   }
 
-  set submitter(value: Bytes | null) {
+  set finalFulfiller(value: Bytes | null) {
     if (!value) {
-      this.unset("submitter");
+      this.unset("finalFulfiller");
     } else {
-      this.set("submitter", Value.fromBytes(<Bytes>value));
+      this.set("finalFulfiller", Value.fromBytes(<Bytes>value));
     }
   }
 }

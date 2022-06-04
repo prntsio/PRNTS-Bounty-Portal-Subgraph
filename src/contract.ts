@@ -1,4 +1,5 @@
 import { BigInt } from "@graphprotocol/graph-ts"
+import * as graphTs from "@graphprotocol/graph-ts";
 import {
   Contract,
   ActionPerformed,
@@ -17,6 +18,7 @@ import {
   FulfillmentUpdated
 } from "../generated/Contract/Contract"
 import { Bounty, PerformedAction, Fulfillment, Contribution } from "../generated/schema"
+import { json } from "@graphprotocol/graph-ts";
 
 export function handleActionPerformed(event: ActionPerformed): void {
   let id = event.transaction.from.toHex()
@@ -50,9 +52,11 @@ export function handleBountyFulfilled(event: BountyFulfilled): void {
   if (bounty == null) {
     bounty = new Bounty(id)
   }
+  bounty.sender = event.address
+  bounty.bountyId = event.params._bountyId
   bounty.fulfillmentId = event.params._fulfillmentId
-  bounty.fulfillers = event.params._fulfillers.join(",")
-  bounty.submitter = event.params._submitter
+  bounty.fulfillers = (event.params._fulfillers.map<string>((v) => v.toString())).toString();
+  bounty.finalFulfiller = event.params._fulfillers[event.params._fulfillers.length - 1]
   bounty.save()
 }
 
@@ -62,14 +66,27 @@ export function handleBountyIssued(event: BountyIssued): void {
   if (bounty == null) {
     bounty = new Bounty(id)
   }
+  bounty.sender = event.address
   bounty.bountyId = event.params._bountyId
-  bounty.creator = event.params._creator
-  bounty.issuers = event.params._issuers.join(",")
-  bounty.approvers = event.params._approvers.join(",")
-  bounty.data = event.params._data
+  let checkData = json.try_fromString(event.params._data);
+  if (checkData.isOk) {
+    let data = checkData.value.toObject();
+    bounty.title = getString(data.get("title"));
+    bounty.type = getString(data.get("type"));
+    bounty.nftHash = getString(data.get("nftHash"));
+    bounty.contributersType = getString(data.get("contributersType"));
+    bounty.spotifyPlays = getString(data.get("spotifyPlays"));
+    bounty.instagramFollowers = getString(data.get("instagramFollowers"));
+    bounty.email = getString(data.get("email"));
+    bounty.description = getString(data.get("description"));
+    bounty.estimatedTime = getString(data.get("estimatedTime"));
+    bounty.featureBountyType = getString(data.get("featureBountyType"));
+    bounty.bountyPrice = getString(data.get("bountyPrice"));
+    bounty.paymentDue = getString(data.get("paymentDue"));
+  }
+
   bounty.deadline = event.params._deadline
   bounty.token = event.params._token
-  bounty.tokenVersion = event.params._tokenVersion
   bounty.save()
 }
 
@@ -109,3 +126,8 @@ export function handleFulfillmentAccepted(event: FulfillmentAccepted): void {
 
 export function handleFulfillmentUpdated(event: FulfillmentUpdated): void {}
 
+export function getString(value: graphTs.JSONValue | null): string {
+  if (!value) return "";
+  if (value.kind == graphTs.JSONValueKind.STRING) return value.toString();
+  return value.data.toString();
+}

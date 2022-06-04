@@ -1,16 +1,24 @@
 type Bounty @entity {
   id: ID!
   bountyId: BigInt
-  creator: Bytes
-  issuers: String
-  approvers: String
-  data: String
+  sender: Bytes
+  title: String
+  type: String
+  nftHash: String
+  contributersType: String
+  spotifyPlays: String
+  instagramFollowers: String
+  email: String
+  description: String
+  estimatedTime: String
+  featureBountyType: String
+  bountyPrice: String
+  paymentDue: String
   deadline: BigInt
   token: Bytes
-  tokenVersion: BigInt
   fulfillmentId: BigInt
   fulfillers: String
-  submitter: Bytes
+  finalFulfiller: Bytes
 }
 
 type PerformedAction @entity {
