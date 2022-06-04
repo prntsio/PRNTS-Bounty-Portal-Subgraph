@@ -1,8 +1,38 @@
 type Bounty @entity {
   id: ID!
-  creator: Bytes!
+  bountyId: BigInt
+  creator: Bytes
+  issuers: String
+  approvers: String
+  data: String
+  deadline: BigInt
+  token: Bytes
+  tokenVersion: BigInt
+  fulfillmentId: BigInt
+  fulfillers: String
+  submitter: Bytes
+}
+
+type PerformedAction @entity {
+  id: ID!
+  bountyId: BigInt!
+  fulfiller: Bytes!
   data: String!
-  deadline: BigInt!
-  token: Bytes!
-  tokenVersion: BigInt!  
+}
+
+type Fulfillment @entity {
+  id: ID!
+  bountyId: BigInt!
+  fulfillmentId: BigInt!
+  approver: Bytes!
+  tokenAmounts: String
+  data: String
+}
+
+type Contribution @entity {
+  id: ID!
+  bountyId: BigInt!
+  contributionId: BigInt!
+  contributor: Bytes!
+  amount: BigInt!
 }

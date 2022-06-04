@@ -42,13 +42,241 @@ export class Bounty extends Entity {
     this.set("id", Value.fromString(value));
   }
 
-  get creator(): Bytes {
+  get bountyId(): BigInt | null {
+    let value = this.get("bountyId");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toBigInt();
+    }
+  }
+
+  set bountyId(value: BigInt | null) {
+    if (!value) {
+      this.unset("bountyId");
+    } else {
+      this.set("bountyId", Value.fromBigInt(<BigInt>value));
+    }
+  }
+
+  get creator(): Bytes | null {
     let value = this.get("creator");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toBytes();
+    }
+  }
+
+  set creator(value: Bytes | null) {
+    if (!value) {
+      this.unset("creator");
+    } else {
+      this.set("creator", Value.fromBytes(<Bytes>value));
+    }
+  }
+
+  get issuers(): string | null {
+    let value = this.get("issuers");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toString();
+    }
+  }
+
+  set issuers(value: string | null) {
+    if (!value) {
+      this.unset("issuers");
+    } else {
+      this.set("issuers", Value.fromString(<string>value));
+    }
+  }
+
+  get approvers(): string | null {
+    let value = this.get("approvers");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toString();
+    }
+  }
+
+  set approvers(value: string | null) {
+    if (!value) {
+      this.unset("approvers");
+    } else {
+      this.set("approvers", Value.fromString(<string>value));
+    }
+  }
+
+  get data(): string | null {
+    let value = this.get("data");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toString();
+    }
+  }
+
+  set data(value: string | null) {
+    if (!value) {
+      this.unset("data");
+    } else {
+      this.set("data", Value.fromString(<string>value));
+    }
+  }
+
+  get deadline(): BigInt | null {
+    let value = this.get("deadline");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toBigInt();
+    }
+  }
+
+  set deadline(value: BigInt | null) {
+    if (!value) {
+      this.unset("deadline");
+    } else {
+      this.set("deadline", Value.fromBigInt(<BigInt>value));
+    }
+  }
+
+  get token(): Bytes | null {
+    let value = this.get("token");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toBytes();
+    }
+  }
+
+  set token(value: Bytes | null) {
+    if (!value) {
+      this.unset("token");
+    } else {
+      this.set("token", Value.fromBytes(<Bytes>value));
+    }
+  }
+
+  get tokenVersion(): BigInt | null {
+    let value = this.get("tokenVersion");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toBigInt();
+    }
+  }
+
+  set tokenVersion(value: BigInt | null) {
+    if (!value) {
+      this.unset("tokenVersion");
+    } else {
+      this.set("tokenVersion", Value.fromBigInt(<BigInt>value));
+    }
+  }
+
+  get fulfillmentId(): BigInt | null {
+    let value = this.get("fulfillmentId");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toBigInt();
+    }
+  }
+
+  set fulfillmentId(value: BigInt | null) {
+    if (!value) {
+      this.unset("fulfillmentId");
+    } else {
+      this.set("fulfillmentId", Value.fromBigInt(<BigInt>value));
+    }
+  }
+
+  get fulfillers(): string | null {
+    let value = this.get("fulfillers");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toString();
+    }
+  }
+
+  set fulfillers(value: string | null) {
+    if (!value) {
+      this.unset("fulfillers");
+    } else {
+      this.set("fulfillers", Value.fromString(<string>value));
+    }
+  }
+
+  get submitter(): Bytes | null {
+    let value = this.get("submitter");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toBytes();
+    }
+  }
+
+  set submitter(value: Bytes | null) {
+    if (!value) {
+      this.unset("submitter");
+    } else {
+      this.set("submitter", Value.fromBytes(<Bytes>value));
+    }
+  }
+}
+
+export class PerformedAction extends Entity {
+  constructor(id: string) {
+    super();
+    this.set("id", Value.fromString(id));
+  }
+
+  save(): void {
+    let id = this.get("id");
+    assert(id != null, "Cannot save PerformedAction entity without an ID");
+    if (id) {
+      assert(
+        id.kind == ValueKind.STRING,
+        `Entities of type PerformedAction must have an ID of type String but the id '${id.displayData()}' is of type ${id.displayKind()}`
+      );
+      store.set("PerformedAction", id.toString(), this);
+    }
+  }
+
+  static load(id: string): PerformedAction | null {
+    return changetype<PerformedAction | null>(store.get("PerformedAction", id));
+  }
+
+  get id(): string {
+    let value = this.get("id");
+    return value!.toString();
+  }
+
+  set id(value: string) {
+    this.set("id", Value.fromString(value));
+  }
+
+  get bountyId(): BigInt {
+    let value = this.get("bountyId");
+    return value!.toBigInt();
+  }
+
+  set bountyId(value: BigInt) {
+    this.set("bountyId", Value.fromBigInt(value));
+  }
+
+  get fulfiller(): Bytes {
+    let value = this.get("fulfiller");
     return value!.toBytes();
   }
 
-  set creator(value: Bytes) {
-    this.set("creator", Value.fromBytes(value));
+  set fulfiller(value: Bytes) {
+    this.set("fulfiller", Value.fromBytes(value));
   }
 
   get data(): string {
@@ -59,31 +287,165 @@ export class Bounty extends Entity {
   set data(value: string) {
     this.set("data", Value.fromString(value));
   }
+}
 
-  get deadline(): BigInt {
-    let value = this.get("deadline");
+export class Fulfillment extends Entity {
+  constructor(id: string) {
+    super();
+    this.set("id", Value.fromString(id));
+  }
+
+  save(): void {
+    let id = this.get("id");
+    assert(id != null, "Cannot save Fulfillment entity without an ID");
+    if (id) {
+      assert(
+        id.kind == ValueKind.STRING,
+        `Entities of type Fulfillment must have an ID of type String but the id '${id.displayData()}' is of type ${id.displayKind()}`
+      );
+      store.set("Fulfillment", id.toString(), this);
+    }
+  }
+
+  static load(id: string): Fulfillment | null {
+    return changetype<Fulfillment | null>(store.get("Fulfillment", id));
+  }
+
+  get id(): string {
+    let value = this.get("id");
+    return value!.toString();
+  }
+
+  set id(value: string) {
+    this.set("id", Value.fromString(value));
+  }
+
+  get bountyId(): BigInt {
+    let value = this.get("bountyId");
     return value!.toBigInt();
   }
 
-  set deadline(value: BigInt) {
-    this.set("deadline", Value.fromBigInt(value));
+  set bountyId(value: BigInt) {
+    this.set("bountyId", Value.fromBigInt(value));
   }
 
-  get token(): Bytes {
-    let value = this.get("token");
+  get fulfillmentId(): BigInt {
+    let value = this.get("fulfillmentId");
+    return value!.toBigInt();
+  }
+
+  set fulfillmentId(value: BigInt) {
+    this.set("fulfillmentId", Value.fromBigInt(value));
+  }
+
+  get approver(): Bytes {
+    let value = this.get("approver");
     return value!.toBytes();
   }
 
-  set token(value: Bytes) {
-    this.set("token", Value.fromBytes(value));
+  set approver(value: Bytes) {
+    this.set("approver", Value.fromBytes(value));
   }
 
-  get tokenVersion(): BigInt {
-    let value = this.get("tokenVersion");
+  get tokenAmounts(): string | null {
+    let value = this.get("tokenAmounts");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toString();
+    }
+  }
+
+  set tokenAmounts(value: string | null) {
+    if (!value) {
+      this.unset("tokenAmounts");
+    } else {
+      this.set("tokenAmounts", Value.fromString(<string>value));
+    }
+  }
+
+  get data(): string | null {
+    let value = this.get("data");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toString();
+    }
+  }
+
+  set data(value: string | null) {
+    if (!value) {
+      this.unset("data");
+    } else {
+      this.set("data", Value.fromString(<string>value));
+    }
+  }
+}
+
+export class Contribution extends Entity {
+  constructor(id: string) {
+    super();
+    this.set("id", Value.fromString(id));
+  }
+
+  save(): void {
+    let id = this.get("id");
+    assert(id != null, "Cannot save Contribution entity without an ID");
+    if (id) {
+      assert(
+        id.kind == ValueKind.STRING,
+        `Entities of type Contribution must have an ID of type String but the id '${id.displayData()}' is of type ${id.displayKind()}`
+      );
+      store.set("Contribution", id.toString(), this);
+    }
+  }
+
+  static load(id: string): Contribution | null {
+    return changetype<Contribution | null>(store.get("Contribution", id));
+  }
+
+  get id(): string {
+    let value = this.get("id");
+    return value!.toString();
+  }
+
+  set id(value: string) {
+    this.set("id", Value.fromString(value));
+  }
+
+  get bountyId(): BigInt {
+    let value = this.get("bountyId");
     return value!.toBigInt();
   }
 
-  set tokenVersion(value: BigInt) {
-    this.set("tokenVersion", Value.fromBigInt(value));
+  set bountyId(value: BigInt) {
+    this.set("bountyId", Value.fromBigInt(value));
+  }
+
+  get contributionId(): BigInt {
+    let value = this.get("contributionId");
+    return value!.toBigInt();
+  }
+
+  set contributionId(value: BigInt) {
+    this.set("contributionId", Value.fromBigInt(value));
+  }
+
+  get contributor(): Bytes {
+    let value = this.get("contributor");
+    return value!.toBytes();
+  }
+
+  set contributor(value: Bytes) {
+    this.set("contributor", Value.fromBytes(value));
+  }
+
+  get amount(): BigInt {
+    let value = this.get("amount");
+    return value!.toBigInt();
+  }
+
+  set amount(value: BigInt) {
+    this.set("amount", Value.fromBigInt(value));
   }
 }
