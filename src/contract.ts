@@ -45,7 +45,7 @@ export function handleActionPerformed(event: ActionPerformed): void {
       if (bounty == null) {
         return
       }
-      var fulfillers: String = bounty.fulfillers!
+      var fulfillers: string = bounty.fulfillers!
       fulfillers += ","
       fulfillers += action.fulfillerToAdd!
       bounty.fulfillers = fulfillers
@@ -106,7 +106,7 @@ export function handleBountyIssued(event: BountyIssued): void {
     bounty.nftHash = getString(data.get("nftHash"));
     bounty.fileHash = getString(data.get("fileHash"));
     bounty.contributersType = getString(data.get("contributersType"));
-    bounty.spotifyPlays = getInt(data.get("spotifyPlays"));
+    bounty.spotifyPlays = getString(data.get("spotifyPlays"));
     bounty.instagramFollowers = getInt(data.get("instagramFollowers"));
     bounty.email = getString(data.get("email"));
     bounty.description = getString(data.get("description"));

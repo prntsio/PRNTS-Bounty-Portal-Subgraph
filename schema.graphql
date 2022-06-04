@@ -7,7 +7,7 @@ type Bounty @entity {
   nftHash: String
   fileHash: String
   contributersType: String
-  spotifyPlays: BigInt
+  spotifyPlays: String
   instagramFollowers: BigInt
   email: String
   description: String

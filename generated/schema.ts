@@ -161,20 +161,20 @@ export class Bounty extends Entity {
     }
   }
 
-  get spotifyPlays(): BigInt | null {
+  get spotifyPlays(): string | null {
     let value = this.get("spotifyPlays");
     if (!value || value.kind == ValueKind.NULL) {
       return null;
     } else {
-      return value.toBigInt();
+      return value.toString();
     }
   }
 
-  set spotifyPlays(value: BigInt | null) {
+  set spotifyPlays(value: string | null) {
     if (!value) {
       this.unset("spotifyPlays");
     } else {
-      this.set("spotifyPlays", Value.fromBigInt(<BigInt>value));
+      this.set("spotifyPlays", Value.fromString(<string>value));
     }
   }
 
