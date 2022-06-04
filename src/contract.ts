@@ -20,6 +20,8 @@ import {
 import { Bounty, PerformedAction, Fulfillment, Contribution } from "../generated/schema"
 import { json } from "@graphprotocol/graph-ts";
 
+const BIGINT_ZERO = BigInt.fromI32(0);
+
 export function handleActionPerformed(event: ActionPerformed): void {
   let id = event.transaction.from.toHex()
   let action = PerformedAction.load(id)
@@ -39,13 +41,22 @@ export function handleActionPerformed(event: ActionPerformed): void {
 
     if (event.params._bountyId && action.mode == "addFulfiller") {
       let bounty = Bounty.load(event.params._bountyId.toString())
-      bounty!.fulfillers += `,${action.fulfillerToAdd}`;
-      bounty!.save()
+      if (bounty == null) {
+        return
+      }
+      var fulfillers: String = bounty.fulfillers!
+      fulfillers += ","
+      fulfillers += action.fulfillerToAdd!
+      bounty.fulfillers = fulfillers
+      bounty.save()
     }
     if (event.params._bountyId && action.mode == "setfinalFulfiller") {
       let bounty = Bounty.load(event.params._bountyId.toString())
-      bounty!.finalFulfiller = action.finalFulfiller;
-      bounty!.save()
+      if (bounty == null) {
+        return
+      }
+      bounty.finalFulfiller = action.finalFulfiller
+      bounty.save()
     }
   }
   action.save()
@@ -92,18 +103,18 @@ export function handleBountyIssued(event: BountyIssued): void {
     bounty.type = getString(data.get("type"));
     bounty.nftHash = getString(data.get("nftHash"));
     bounty.contributersType = getString(data.get("contributersType"));
-    bounty.spotifyPlays = getString(data.get("spotifyPlays"));
-    bounty.instagramFollowers = getString(data.get("instagramFollowers"));
+    bounty.spotifyPlays = getInt(data.get("spotifyPlays"));
+    bounty.instagramFollowers = getInt(data.get("instagramFollowers"));
     bounty.email = getString(data.get("email"));
     bounty.description = getString(data.get("description"));
-    bounty.estimatedTime = getString(data.get("estimatedTime"));
+    bounty.estimatedTime = getInt(data.get("estimatedTime"));
     bounty.featureBountyType = getString(data.get("featureBountyType"));
-    bounty.bountyPrice = getString(data.get("bountyPrice"));
-    bounty.paymentDue = getString(data.get("paymentDue"));
+    bounty.bountyPrice = getInt(data.get("bountyPrice"));
+    bounty.paymentDue = getInt(data.get("paymentDue"));
   }
   bounty.deadline = event.params._deadline
   bounty.token = event.params._token
-  bounty.createdAt = Date.now().toString()
+  bounty.createdAt = event.block.timestamp
   bounty.save()
 }
 
@@ -147,4 +158,14 @@ export function getString(value: graphTs.JSONValue | null): string {
   if (!value) return "";
   if (value.kind == graphTs.JSONValueKind.STRING) return value.toString();
   return value.data.toString();
+}
+
+export function getInt(value: graphTs.JSONValue | null): graphTs.BigInt {
+  if (!value) return graphTs.BigInt.fromI64(-1);
+  if (value.kind == graphTs.JSONValueKind.STRING) {
+    if (value.toString().length == 0) return BIGINT_ZERO;
+    return graphTs.BigInt.fromString(value.toString());
+  }
+  if (value.kind == graphTs.JSONValueKind.NUMBER) return value.toBigInt();
+  return graphTs.BigInt.fromI64(value.data);
 }

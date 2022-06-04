@@ -6,20 +6,20 @@ type Bounty @entity {
   type: String
   nftHash: String
   contributersType: String
-  spotifyPlays: String
-  instagramFollowers: String
+  spotifyPlays: BigInt
+  instagramFollowers: BigInt
   email: String
   description: String
-  estimatedTime: String
+  estimatedTime: BigInt
   featureBountyType: String
-  bountyPrice: String
-  paymentDue: String
+  bountyPrice: BigInt
+  paymentDue: BigInt
   deadline: BigInt
   token: Bytes
   fulfillmentId: BigInt
   fulfillers: String
   finalFulfiller: String
-  createdAt: String
+  createdAt: BigInt
 }
 
 type PerformedAction @entity {

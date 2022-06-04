@@ -144,37 +144,37 @@ export class Bounty extends Entity {
     }
   }
 
-  get spotifyPlays(): string | null {
+  get spotifyPlays(): BigInt | null {
     let value = this.get("spotifyPlays");
     if (!value || value.kind == ValueKind.NULL) {
       return null;
     } else {
-      return value.toString();
+      return value.toBigInt();
     }
   }
 
-  set spotifyPlays(value: string | null) {
+  set spotifyPlays(value: BigInt | null) {
     if (!value) {
       this.unset("spotifyPlays");
     } else {
-      this.set("spotifyPlays", Value.fromString(<string>value));
+      this.set("spotifyPlays", Value.fromBigInt(<BigInt>value));
     }
   }
 
-  get instagramFollowers(): string | null {
+  get instagramFollowers(): BigInt | null {
     let value = this.get("instagramFollowers");
     if (!value || value.kind == ValueKind.NULL) {
       return null;
     } else {
-      return value.toString();
+      return value.toBigInt();
     }
   }
 
-  set instagramFollowers(value: string | null) {
+  set instagramFollowers(value: BigInt | null) {
     if (!value) {
       this.unset("instagramFollowers");
     } else {
-      this.set("instagramFollowers", Value.fromString(<string>value));
+      this.set("instagramFollowers", Value.fromBigInt(<BigInt>value));
     }
   }
 
@@ -212,20 +212,20 @@ export class Bounty extends Entity {
     }
   }
 
-  get estimatedTime(): string | null {
+  get estimatedTime(): BigInt | null {
     let value = this.get("estimatedTime");
     if (!value || value.kind == ValueKind.NULL) {
       return null;
     } else {
-      return value.toString();
+      return value.toBigInt();
     }
   }
 
-  set estimatedTime(value: string | null) {
+  set estimatedTime(value: BigInt | null) {
     if (!value) {
       this.unset("estimatedTime");
     } else {
-      this.set("estimatedTime", Value.fromString(<string>value));
+      this.set("estimatedTime", Value.fromBigInt(<BigInt>value));
     }
   }
 
@@ -246,37 +246,37 @@ export class Bounty extends Entity {
     }
   }
 
-  get bountyPrice(): string | null {
+  get bountyPrice(): BigInt | null {
     let value = this.get("bountyPrice");
     if (!value || value.kind == ValueKind.NULL) {
       return null;
     } else {
-      return value.toString();
+      return value.toBigInt();
     }
   }
 
-  set bountyPrice(value: string | null) {
+  set bountyPrice(value: BigInt | null) {
     if (!value) {
       this.unset("bountyPrice");
     } else {
-      this.set("bountyPrice", Value.fromString(<string>value));
+      this.set("bountyPrice", Value.fromBigInt(<BigInt>value));
     }
   }
 
-  get paymentDue(): string | null {
+  get paymentDue(): BigInt | null {
     let value = this.get("paymentDue");
     if (!value || value.kind == ValueKind.NULL) {
       return null;
     } else {
-      return value.toString();
+      return value.toBigInt();
     }
   }
 
-  set paymentDue(value: string | null) {
+  set paymentDue(value: BigInt | null) {
     if (!value) {
       this.unset("paymentDue");
     } else {
-      this.set("paymentDue", Value.fromString(<string>value));
+      this.set("paymentDue", Value.fromBigInt(<BigInt>value));
     }
   }
 
@@ -365,20 +365,20 @@ export class Bounty extends Entity {
     }
   }
 
-  get createdAt(): string | null {
+  get createdAt(): BigInt | null {
     let value = this.get("createdAt");
     if (!value || value.kind == ValueKind.NULL) {
       return null;
     } else {
-      return value.toString();
+      return value.toBigInt();
     }
   }
 
-  set createdAt(value: string | null) {
+  set createdAt(value: BigInt | null) {
     if (!value) {
       this.unset("createdAt");
     } else {
-      this.set("createdAt", Value.fromString(<string>value));
+      this.set("createdAt", Value.fromBigInt(<BigInt>value));
     }
   }
 }
