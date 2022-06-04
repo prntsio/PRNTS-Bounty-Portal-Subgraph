@@ -102,6 +102,7 @@ export function handleBountyIssued(event: BountyIssued): void {
     bounty.title = getString(data.get("title"));
     bounty.type = getString(data.get("type"));
     bounty.nftHash = getString(data.get("nftHash"));
+    bounty.fileHash = getString(data.get("fileHash"));
     bounty.contributersType = getString(data.get("contributersType"));
     bounty.spotifyPlays = getInt(data.get("spotifyPlays"));
     bounty.instagramFollowers = getInt(data.get("instagramFollowers"));

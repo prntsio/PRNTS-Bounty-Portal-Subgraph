@@ -127,6 +127,23 @@ export class Bounty extends Entity {
     }
   }
 
+  get fileHash(): string | null {
+    let value = this.get("fileHash");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toString();
+    }
+  }
+
+  set fileHash(value: string | null) {
+    if (!value) {
+      this.unset("fileHash");
+    } else {
+      this.set("fileHash", Value.fromString(<string>value));
+    }
+  }
+
   get contributersType(): string | null {
     let value = this.get("contributersType");
     if (!value || value.kind == ValueKind.NULL) {
