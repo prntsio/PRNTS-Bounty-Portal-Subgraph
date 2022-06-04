@@ -107,13 +107,13 @@ export function handleBountyIssued(event: BountyIssued): void {
     bounty.fileHash = getString(data.get("fileHash"));
     bounty.contributersType = getString(data.get("contributersType"));
     bounty.spotifyPlays = getString(data.get("spotifyPlays"));
-    bounty.instagramFollowers = getInt(data.get("instagramFollowers"));
+    bounty.instagramFollowers = getString(data.get("instagramFollowers"));
     bounty.email = getString(data.get("email"));
     bounty.description = getString(data.get("description"));
-    bounty.estimatedTime = getInt(data.get("estimatedTime"));
+    bounty.estimatedTime = getString(data.get("estimatedTime"));
     bounty.featureBountyType = getString(data.get("featureBountyType"));
-    bounty.bountyPrice = getInt(data.get("bountyPrice"));
-    bounty.paymentDue = getInt(data.get("paymentDue"));
+    bounty.bountyPrice = getString(data.get("bountyPrice"));
+    bounty.paymentDue = getString(data.get("paymentDue"));
   }
   bounty.deadline = event.params._deadline
   bounty.token = event.params._token

@@ -8,13 +8,13 @@ type Bounty @entity {
   fileHash: String
   contributersType: String
   spotifyPlays: String
-  instagramFollowers: BigInt
+  instagramFollowers: String
   email: String
   description: String
-  estimatedTime: BigInt
+  estimatedTime: String
   featureBountyType: String
-  bountyPrice: BigInt
-  paymentDue: BigInt
+  bountyPrice: String
+  paymentDue: String
   deadline: BigInt
   token: Bytes
   fulfillmentId: BigInt
@@ -38,7 +38,7 @@ type Fulfillment @entity {
   id: ID!
   bountyId: BigInt!
   sender: Bytes
-  fulfillmentId: BigInt!
+  fulfillmentId: BigInt
   approver: Bytes!
   tokenAmounts: String
   data: String
