@@ -26,25 +26,31 @@ type Bounty @entity {
 type PerformedAction @entity {
   id: ID!
   bountyId: BigInt!
+  sender: Bytes
   fulfiller: Bytes!
   mode: String
   fulfillerToAdd: String
   finalFulfiller: String
+  createdAt: BigInt
 }
 
 type Fulfillment @entity {
   id: ID!
   bountyId: BigInt!
+  sender: Bytes
   fulfillmentId: BigInt!
   approver: Bytes!
   tokenAmounts: String
   data: String
+  createdAt: BigInt
 }
 
 type Contribution @entity {
   id: ID!
   bountyId: BigInt!
+  sender: Bytes
   contributionId: BigInt!
   contributor: Bytes!
   amount: BigInt!
+  createdAt: BigInt
 }

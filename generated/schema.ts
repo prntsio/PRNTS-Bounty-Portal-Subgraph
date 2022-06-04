@@ -440,6 +440,23 @@ export class PerformedAction extends Entity {
     this.set("bountyId", Value.fromBigInt(value));
   }
 
+  get sender(): Bytes | null {
+    let value = this.get("sender");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toBytes();
+    }
+  }
+
+  set sender(value: Bytes | null) {
+    if (!value) {
+      this.unset("sender");
+    } else {
+      this.set("sender", Value.fromBytes(<Bytes>value));
+    }
+  }
+
   get fulfiller(): Bytes {
     let value = this.get("fulfiller");
     return value!.toBytes();
@@ -499,6 +516,23 @@ export class PerformedAction extends Entity {
       this.set("finalFulfiller", Value.fromString(<string>value));
     }
   }
+
+  get createdAt(): BigInt | null {
+    let value = this.get("createdAt");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toBigInt();
+    }
+  }
+
+  set createdAt(value: BigInt | null) {
+    if (!value) {
+      this.unset("createdAt");
+    } else {
+      this.set("createdAt", Value.fromBigInt(<BigInt>value));
+    }
+  }
 }
 
 export class Fulfillment extends Entity {
@@ -539,6 +573,23 @@ export class Fulfillment extends Entity {
 
   set bountyId(value: BigInt) {
     this.set("bountyId", Value.fromBigInt(value));
+  }
+
+  get sender(): Bytes | null {
+    let value = this.get("sender");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toBytes();
+    }
+  }
+
+  set sender(value: Bytes | null) {
+    if (!value) {
+      this.unset("sender");
+    } else {
+      this.set("sender", Value.fromBytes(<Bytes>value));
+    }
   }
 
   get fulfillmentId(): BigInt {
@@ -592,6 +643,23 @@ export class Fulfillment extends Entity {
       this.set("data", Value.fromString(<string>value));
     }
   }
+
+  get createdAt(): BigInt | null {
+    let value = this.get("createdAt");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toBigInt();
+    }
+  }
+
+  set createdAt(value: BigInt | null) {
+    if (!value) {
+      this.unset("createdAt");
+    } else {
+      this.set("createdAt", Value.fromBigInt(<BigInt>value));
+    }
+  }
 }
 
 export class Contribution extends Entity {
@@ -634,6 +702,23 @@ export class Contribution extends Entity {
     this.set("bountyId", Value.fromBigInt(value));
   }
 
+  get sender(): Bytes | null {
+    let value = this.get("sender");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toBytes();
+    }
+  }
+
+  set sender(value: Bytes | null) {
+    if (!value) {
+      this.unset("sender");
+    } else {
+      this.set("sender", Value.fromBytes(<Bytes>value));
+    }
+  }
+
   get contributionId(): BigInt {
     let value = this.get("contributionId");
     return value!.toBigInt();
@@ -659,5 +744,22 @@ export class Contribution extends Entity {
 
   set amount(value: BigInt) {
     this.set("amount", Value.fromBigInt(value));
+  }
+
+  get createdAt(): BigInt | null {
+    let value = this.get("createdAt");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toBigInt();
+    }
+  }
+
+  set createdAt(value: BigInt | null) {
+    if (!value) {
+      this.unset("createdAt");
+    } else {
+      this.set("createdAt", Value.fromBigInt(<BigInt>value));
+    }
   }
 }

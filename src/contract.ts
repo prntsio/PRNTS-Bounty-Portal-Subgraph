@@ -30,6 +30,7 @@ export function handleActionPerformed(event: ActionPerformed): void {
   }
   
   action.bountyId = event.params._bountyId
+  action.sender = event.address
   action.fulfiller = event.params._fulfiller
 
   let checkData = json.try_fromString(event.params._data);
@@ -59,6 +60,7 @@ export function handleActionPerformed(event: ActionPerformed): void {
       bounty.save()
     }
   }
+  action.createdAt = event.block.timestamp
   action.save()
 }
 
@@ -128,9 +130,11 @@ export function handleContributionAdded(event: ContributionAdded): void {
     contribution = new Contribution(id)
   }
   contribution.bountyId = event.params._bountyId
+  contribution.sender = event.address
   contribution.contributionId = event.params._contributionId
   contribution.contributor = event.params._contributor
   contribution.amount = event.params._amount
+  contribution.createdAt = event.block.timestamp
   contribution.save()
 }
 
@@ -147,9 +151,11 @@ export function handleFulfillmentAccepted(event: FulfillmentAccepted): void {
     fulfillment = new Fulfillment(id)
   }
   fulfillment.bountyId = event.params._bountyId
+  fulfillment.sender = event.address
   fulfillment.fulfillmentId = event.params._fulfillmentId
   fulfillment.approver = event.params._approver
   fulfillment.tokenAmounts = ""
+  fulfillment.createdAt = event.block.timestamp
   fulfillment.save()
 }
 
