@@ -18,14 +18,17 @@ type Bounty @entity {
   token: Bytes
   fulfillmentId: BigInt
   fulfillers: String
-  finalFulfiller: Bytes
+  finalFulfiller: String
+  createdAt: String
 }
 
 type PerformedAction @entity {
   id: ID!
   bountyId: BigInt!
   fulfiller: Bytes!
-  data: String!
+  mode: String
+  fulfillerToAdd: String
+  finalFulfiller: String
 }
 
 type Fulfillment @entity {

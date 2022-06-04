@@ -348,20 +348,37 @@ export class Bounty extends Entity {
     }
   }
 
-  get finalFulfiller(): Bytes | null {
+  get finalFulfiller(): string | null {
     let value = this.get("finalFulfiller");
     if (!value || value.kind == ValueKind.NULL) {
       return null;
     } else {
-      return value.toBytes();
+      return value.toString();
     }
   }
 
-  set finalFulfiller(value: Bytes | null) {
+  set finalFulfiller(value: string | null) {
     if (!value) {
       this.unset("finalFulfiller");
     } else {
-      this.set("finalFulfiller", Value.fromBytes(<Bytes>value));
+      this.set("finalFulfiller", Value.fromString(<string>value));
+    }
+  }
+
+  get createdAt(): string | null {
+    let value = this.get("createdAt");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toString();
+    }
+  }
+
+  set createdAt(value: string | null) {
+    if (!value) {
+      this.unset("createdAt");
+    } else {
+      this.set("createdAt", Value.fromString(<string>value));
     }
   }
 }
@@ -415,13 +432,55 @@ export class PerformedAction extends Entity {
     this.set("fulfiller", Value.fromBytes(value));
   }
 
-  get data(): string {
-    let value = this.get("data");
-    return value!.toString();
+  get mode(): string | null {
+    let value = this.get("mode");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toString();
+    }
   }
 
-  set data(value: string) {
-    this.set("data", Value.fromString(value));
+  set mode(value: string | null) {
+    if (!value) {
+      this.unset("mode");
+    } else {
+      this.set("mode", Value.fromString(<string>value));
+    }
+  }
+
+  get fulfillerToAdd(): string | null {
+    let value = this.get("fulfillerToAdd");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toString();
+    }
+  }
+
+  set fulfillerToAdd(value: string | null) {
+    if (!value) {
+      this.unset("fulfillerToAdd");
+    } else {
+      this.set("fulfillerToAdd", Value.fromString(<string>value));
+    }
+  }
+
+  get finalFulfiller(): string | null {
+    let value = this.get("finalFulfiller");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toString();
+    }
+  }
+
+  set finalFulfiller(value: string | null) {
+    if (!value) {
+      this.unset("finalFulfiller");
+    } else {
+      this.set("finalFulfiller", Value.fromString(<string>value));
+    }
   }
 }
 

@@ -26,9 +26,28 @@ export function handleActionPerformed(event: ActionPerformed): void {
   if (action == null) {
     action = new PerformedAction(id)
   }
+  
   action.bountyId = event.params._bountyId
   action.fulfiller = event.params._fulfiller
-  action.data = event.params._data
+
+  let checkData = json.try_fromString(event.params._data);
+  if (checkData.isOk) {
+    let data = checkData.value.toObject();
+    action.mode = getString(data.get("mode"));
+    action.fulfillerToAdd = getString(data.get("fulfillerToAdd"));
+    action.finalFulfiller = getString(data.get("finalFulfiller"));
+
+    if (event.params._bountyId && action.mode == "addFulfiller") {
+      let bounty = Bounty.load(event.params._bountyId.toString())
+      bounty!.fulfillers += `,${action.fulfillerToAdd}`;
+      bounty!.save()
+    }
+    if (event.params._bountyId && action.mode == "setfinalFulfiller") {
+      let bounty = Bounty.load(event.params._bountyId.toString())
+      bounty!.finalFulfiller = action.finalFulfiller;
+      bounty!.save()
+    }
+  }
   action.save()
 }
 
@@ -55,8 +74,6 @@ export function handleBountyFulfilled(event: BountyFulfilled): void {
   bounty.sender = event.address
   bounty.bountyId = event.params._bountyId
   bounty.fulfillmentId = event.params._fulfillmentId
-  bounty.fulfillers = (event.params._fulfillers.map<string>((v) => v.toString())).toString();
-  bounty.finalFulfiller = event.params._fulfillers[event.params._fulfillers.length - 1]
   bounty.save()
 }
 
@@ -84,9 +101,9 @@ export function handleBountyIssued(event: BountyIssued): void {
     bounty.bountyPrice = getString(data.get("bountyPrice"));
     bounty.paymentDue = getString(data.get("paymentDue"));
   }
-
   bounty.deadline = event.params._deadline
   bounty.token = event.params._token
+  bounty.createdAt = Date.now().toString()
   bounty.save()
 }
 
