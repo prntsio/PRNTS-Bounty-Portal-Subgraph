@@ -15,7 +15,7 @@ import {
   ContributionRefunded,
   ContributionsRefunded,
   FulfillmentAccepted,
-  FulfillmentUpdated
+  FulfillmentUpdated,
 } from "../generated/Contract/Contract"
 import { Bounty, PerformedAction, Fulfillment, Contribution } from "../generated/schema"
 import { json } from "@graphprotocol/graph-ts";
@@ -23,14 +23,14 @@ import { json } from "@graphprotocol/graph-ts";
 const BIGINT_ZERO = BigInt.fromI32(0);
 
 export function handleActionPerformed(event: ActionPerformed): void {
-  let id = event.transaction.from.toHex()
+  let id = event.transaction.hash.toHex()
   let action = PerformedAction.load(id)
   if (action == null) {
     action = new PerformedAction(id)
   }
   
   action.bountyId = event.params._bountyId
-  action.sender = event.address
+  action.sender = event.transaction.from
   action.fulfiller = event.params._fulfiller
 
   let checkData = json.try_fromString(event.params._data);
@@ -79,24 +79,24 @@ export function handleBountyDeadlineChanged(
 export function handleBountyDrained(event: BountyDrained): void {}
 
 export function handleBountyFulfilled(event: BountyFulfilled): void {
-  let id = event.transaction.from.toHex()
+  let id = event.params._bountyId.toHex()
   let bounty = Bounty.load(id)
   if (bounty == null) {
     bounty = new Bounty(id)
   }
-  bounty.sender = event.address
+  bounty.sender = event.transaction.from
   bounty.bountyId = event.params._bountyId
   bounty.fulfillmentId = event.params._fulfillmentId
   bounty.save()
 }
 
 export function handleBountyIssued(event: BountyIssued): void {
-  let id = event.transaction.from.toHex()
+  let id = event.params._bountyId.toHex()
   let bounty = Bounty.load(id)
   if (bounty == null) {
     bounty = new Bounty(id)
   }
-  bounty.sender = event.address
+  bounty.sender = event.transaction.from
   bounty.bountyId = event.params._bountyId
   let checkData = json.try_fromString(event.params._data);
   if (checkData.isOk) {
@@ -124,13 +124,13 @@ export function handleBountyIssued(event: BountyIssued): void {
 export function handleBountyIssuersUpdated(event: BountyIssuersUpdated): void {}
 
 export function handleContributionAdded(event: ContributionAdded): void {
-  let id = event.transaction.from.toHex()
+  let id = event.transaction.hash.toHex()
   let contribution = Contribution.load(id)
   if (contribution == null) {
     contribution = new Contribution(id)
   }
   contribution.bountyId = event.params._bountyId
-  contribution.sender = event.address
+  contribution.sender = event.transaction.from
   contribution.contributionId = event.params._contributionId
   contribution.contributor = event.params._contributor
   contribution.amount = event.params._amount
@@ -145,13 +145,13 @@ export function handleContributionsRefunded(
 ): void {}
 
 export function handleFulfillmentAccepted(event: FulfillmentAccepted): void {
-  let id = event.transaction.from.toHex()
+  let id = event.transaction.hash.toHex()
   let fulfillment = Fulfillment.load(id)
   if (fulfillment == null) {
     fulfillment = new Fulfillment(id)
   }
   fulfillment.bountyId = event.params._bountyId
-  fulfillment.sender = event.address
+  fulfillment.sender = event.transaction.from
   fulfillment.fulfillmentId = event.params._fulfillmentId
   fulfillment.approver = event.params._approver
   fulfillment.tokenAmounts = ""
