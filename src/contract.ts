@@ -40,8 +40,10 @@ export function handleActionPerformed(event: ActionPerformed): void {
     action.fulfillerToAdd = getString(data.get("fulfillerToAdd"));
     action.finalFulfiller = getString(data.get("finalFulfiller"));
 
+
+
     if (event.params._bountyId && action.mode == "addFulfiller") {
-      let bounty = Bounty.load(event.params._bountyId.toString())
+      let bounty = Bounty.load(event.params._bountyId.toHex())
       if (bounty == null) {
         return
       }
@@ -52,7 +54,7 @@ export function handleActionPerformed(event: ActionPerformed): void {
       bounty.save()
     }
     if (event.params._bountyId && action.mode == "setfinalFulfiller") {
-      let bounty = Bounty.load(event.params._bountyId.toString())
+      let bounty = Bounty.load(event.params._bountyId.toHex())
       if (bounty == null) {
         return
       }
